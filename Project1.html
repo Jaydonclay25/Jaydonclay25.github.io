@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Project 1</title>
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+		<script>
+			$(function() {
+				$("#tabs").tabs();
+			});
+		</script>
+			
+		<style>
+			@media screen and (min-width: 320px) {
+				#wrapper {width: 600px; margin: auto;}
+				#header {height: 150px;}
+				#menu {height: 50px;}
+				#animationContainer {height: 250px; width: 250px; margin: 10px; position: relative; float: right; background-color: aqua;}
+				#animation {height: 50px; width: 50px; margin: auto; position: absolute; right: 100px; background-color: green;}
+				img {height: 250px; width: 400px; margin: auto; border-radius: 25%; display: block;}
+				img:fullscreen {border-radius: 0px;}
+				#achievementImg {width: 250px; margin: 10px; float: left; display: inline; cursor: pointer;}
+				p {padding: 25px;}
+				.ui-tabs .ui-tabs-nav {background-color: aqua;}
+				.ui-tabs .ui-tabs-panel {background-color: aquamarine;}
+			}
+			@media screen and (min-width: 768px) {
+				#wrapper {width: 900px;}
+				#header {height: 200px;}
+				#menu {height: 20px;}
+				#animationContainer {height: 250px; width: 250px; margin: 25px; position: relative; float: right; background-color: aqua;}
+				#animation {height: 50px; width: 50px; margin: auto; position: absolute; right: 100px; background-color: green;}
+				img {float: left; margin: 25px 50px; display: inline;}
+				img:fullscreen {border-radius: 0px;}
+				#achievementImg {width: 250px; margin: 25px; float: left; display: inline; cursor: pointer;}
+				.ui-tabs .ui-tabs-nav {padding: 0px; margin: 0px;}
+				.ui-tabs .ui-tabs-nav li {height: 16px;}
+				.ui-tabs .ui-tabs-nav li a {font-size: 10px;}
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<h1>Jaydon's Website</h1><hr>
+				<p>
+					Welcome to my website. Here is a interactive project I 
+					created with JQuery, personal information (my internship), 
+					and a fun fact about myself.
+				</p>
+			</div>
+			<div id="tabs">
+				<div id="menu">
+					<ul>
+						<li><a href="#tabs-1">Work</a></li>
+						<li><a href="#tabs-2">Personal Info</a></li>
+						<li><a href="#tabs-3">Fun Fact</a></li>
+					</ul>
+				</div>
+				<div id="tabs-1">
+					<h2>Counting Game</h2>
+					<button id="but1">Count Up</button>
+					<button id="but2">Count Down</button>
+					<p id="numOutput">0</p>
+					<p id="achievement"></p>
+					<img id="achievementImg" src="Blank.jpg">
+					<script>
+						$(function() {
+							let num = 0;
+							let i = 0;
+							let achievmentMessage = '';
+							let emptyMessage = '';
+							function typeWriter() {
+								if (i < achievmentMessage.length) {
+									emptyMessage += achievmentMessage.charAt(i++);
+									$('#achievement').text(emptyMessage);
+									setTimeout(typeWriter, 50);
+								}
+							}
+							function changeImg(a) {
+								$('#achievementImg').attr('src', a);
+							}
+							$('img').on('click', function() {
+								this.requestFullscreen();
+							});
+							$('#but1').on('click', function() {
+								num++;
+								$('#numOutput').text(num);
+								if (num === 10) {
+									i = 0;
+									achievmentMessage = 'Bronze medal earned!';
+									emptyMessage = '';
+									typeWriter();
+									changeImg('Bronze.png');
+								}
+								if (num === 25) {
+									i = 0;
+									achievmentMessage = 'Silver medal earned!';
+									emptyMessage = '';
+									typeWriter();
+									changeImg('Silver.png');
+								}
+								if (num === 50) {
+									i = 0;
+									achievmentMessage = 'Gold medal earned!';
+									emptyMessage = '';
+									typeWriter();
+									changeImg('Gold.png');
+								}
+							});
+							$('#but2').on('click', function () {
+								num--;
+								$('#numOutput').text(num);
+								if (num === 9) {
+									i = 0;
+									achievmentMessage = 'Bronze medal lost :(';
+									emptyMessage = '';
+									typeWriter();
+									changeImg('Blank.jpg');
+								}
+								if (num === 24) {
+									i = 0;
+									achievmentMessage = 'Silver medal lost :(';
+									emptyMessage = '';
+									typeWriter();
+									changeImg('Bronze.png');
+								}
+								if (num === 49) {
+									i = 0;
+									achievmentMessage = 'Gold medal lost :(';
+									emptyMessage = '';
+									typeWriter();
+									changeImg('Silver.png');
+								}
+							});
+						});
+					</script>
+					<div id="animationContainer">
+						<div id="animation"></div>
+					</div>
+					<div style="clear: both;"></div>
+					<script>
+						let pos = 0;
+						let i = 0;
+						let id = setInterval(myAnimation, 5);
+						function myAnimation() {
+							if (pos === 0) {
+								i = 1;
+							}
+							else if (pos === 200) {
+								i = -1;
+							}
+							pos += i;
+							$('#animation').css('top', pos + 'px');
+						}
+					</script>
+				</div>
+				<div id="tabs-2">
+					<img src="Eskenazi_Health.webp">
+					<p>
+						This summer I had the oppurtunity to work at 
+						Eskenazi Health through the Gregory S. Fehribach Center as
+						a remote intern. I learned how to create online courses using
+						Rise 360 and created some for Eskenazi e-learning.
+					</p>
+					<div style="clear: both;"></div>
+				</div>
+				<div id="tabs-3">
+					<img src="Mario_Kart.webp">
+					<p>
+						One time when I was in middle school, my dad
+						took me to the mall, where a Nintendo event
+						was taking place. I entered the tournament
+						for Mario Kart 8 against about 40 people
+						and I ended up earning 1st place. Unfortunately,
+						there wasn't a cash prize, but I did get a plush yoshi
+						, a couple of posters, and a plaque with my name mispelled.
+					</p>
+					<div style="clear: both;"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+		
